@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "articles",
     "users",
     "accounts",
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -125,7 +126,7 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Media files
-MEDIA_URL = "/my-media/"
+MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type

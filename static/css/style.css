@@ -1,1 +1,2 @@
-img {width: 250px;}
+/* 선택되지 않은 탭의 글씨 색상 변경 */
+.nav-link:not(.active) {color: white;}

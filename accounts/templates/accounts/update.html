@@ -1,12 +1,36 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 
 {% block content %}
-    <h1>회원 정보 수정</h1>
-
-    <form action="{% url "accounts:update" %}" method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">수정</button>
-
-    </form>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg" style="width: 400px;">
+        <div class="card-body">
+            <h1 class="text-center mb-4" style="font-family: 'Poppins', sans-serif; font-weight: bold; color: black;">
+                <i class="fa-solid fa-user-pen"></i>
+            </h1>
+            <form action="{% url 'accounts:update' %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_email" class="form-label">E-mail</label>
+                    {{ form.email|add_class:"form-control" }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_first_name" class="form-label">First Name</label>
+                    {{ form.first_name|add_class:"form-control" }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_last_name" class="form-label">Last Name</label>
+                    {{ form.last_name|add_class:"form-control" }}
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fa-solid fa-pen-to-square"></i> 수정하기
+                </button>
+                <hr>
+                <a href="{% url 'accounts:change_password' %}" class="btn btn-danger w-100">
+                    비밀번호 변경
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}

@@ -1,14 +1,27 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 
 {% block content %}
-<h1>로그인 </h1>
-{% if error_message %}
-  <p style="color: red;">{{ error_message }}</p>
-{% endif %}
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="로그인">
-    
-</form>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh; padding: 0 20px;">
+    <div class="card shadow-lg p-5" style="width: 100%; max-width: 500px;">
+        <h1 class="text-center mb-4">👤</h1>
+        {% if error_message %}
+            <p style="color: red; text-align: center;">{{ error_message }}</p>
+        {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Username</label>
+                {{ form.username|add_class:"form-control" }}
+            </div>
+            <div class="mb-3">
+                <label for="id_password" class="form-label">Password</label>
+                {{ form.password|add_class:"form-control" }}
+            </div>
+            <div class="text-center mt-4">
+                <input type="submit" value="로그인" class="btn btn-primary w-100">
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock content %}

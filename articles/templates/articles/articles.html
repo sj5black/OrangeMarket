@@ -1,37 +1,62 @@
 {% extends 'base.html' %}
-{% block content %}
-    <h1>Articles</h1>
+{% load static %}
 
-    {% for article in articles %}
-        <a href="{% url "articles:article_detail" article.pk %}">
-            <p>[{{article.pk}}]{{article.title}}</p>
-        </a>
-        <p>작성자 : {{article.author.username}}</p>
-        <form action="{% url "articles:like" article.pk %}" method="POST">
-            {% csrf_token %}
-            {% if request.user in article.like_users.all %}
-                <button class="btn btn-link text-danger">
-                    <i class="fa-solid fa-heart"></i>
-                </button>
-            {% else %}
-                <button class="btn btn-link text-danger">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            {% endif %}
-            
-        </form>
-        <hr>
-    {% endfor %}
-    <a href="{% url "index" %}">
-        <button>INDEX로 가기</button>
-    </a><br>
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for article in articles %}
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <a href="{% url "articles:article_detail" article.pk %}" class="text-decoration-none text-dark">
+                            {% if article.image %}
+                                <img src="{{ article.image.url }}" alt="{{ article.image }}" class="card-img-top img-thumbnail" style="height: 250px; object-fit: cover;">
+                            {% else %}
+                                <img src="{% static 'articles/placeholder.jpg' %}" alt="Placeholder Image" class="card-img-top img-thumbnail" style="height: 250px; object-fit: cover;">
+                            {% endif %}
+                            <div class="card-body">
+                                <p class="card-text text-muted small text-center">{{ article.title }}</p>
+                            </div>
+                        </a>
+                        <div class="card-footer text-center">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <a href="{% url 'users:profile' username=article.author.username %}" class="text-muted text-decoration-none">판매자: {{ article.author.username }}</a>
+                                </small>
+                                
+                                <form action="{% url "articles:like" article.pk %}" method="POST" class="d-inline">
+                                    {% csrf_token %}
+                                    {% if request.user in article.like_users.all %}
+                                        <button class="btn btn-danger btn-sm">
+                                            <i class="fa-solid fa-heart"></i> 찜 삭제
+                                        </button>
+                                    {% else %}
+                                        <button class="btn btn-outline-danger btn-sm">
+                                            <i class="fa-regular fa-heart"></i> 찜하기
+                                        </button>
+                                    {% endif %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 %}
+                    </div><div class="row">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 
     {% if request.user.is_authenticated %}
-    <a href="{% url "articles:create" %}">
-        <button>새 글 쓰기</button>
-    </a>
+        <div class="text-center mt-4" style="position: sticky; top: 0; z-index: 10;">
+            <a href="{% url 'articles:create' %}" class="btn" style="background: linear-gradient(45deg, #ff7f50, #ff0000); color: white; padding: 10px 20px; border-radius: 25px; font-size: 16px;">
+                <span style="font-size: 20px;">🍊</span> 상품 등록하기
+            </a>
+        </div>
     {% else %}
-        <a href="{% url "accounts:login" %}"> 로그인 </a>
+        <div class="text-center mt-4">
+            <a href="{% url 'accounts:login' %}" class="btn btn-warning">
+                <i class="fa-solid fa-right-to-bracket"></i> 로그인
+            </a>
+        </div>
     {% endif %}
-    
 {% endblock content %}
