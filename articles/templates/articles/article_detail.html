@@ -17,13 +17,22 @@
             <div class="col-md-12">
                 <h3 class="text-center text-white" style="font-size: 1.5rem;">{{ article.title }}</h3>
                 <hr class="border-white">
-                <p class="lead text-white" style="font-size: 1rem;">{{ article.content }}</p>
+                <p class="lead text-white" style="font-size: 1rem;">{{ article.content|linebreaksbr }}</p>
                 <a href="{% url 'users:profile' username=article.author.username %}" class="text-muted text-decoration-none">
                     <div class="text-white text-left mt-4">
                         <img src="{% if article.author.profile_picture %}{{ article.author.profile_picture.url }}{% else %}{% static 'users/user.png' %}{% endif %}" style="height: 20px; width: 20px; object-fit: cover; border-radius: 50%; margin-right: 5px;">
                         {{ article.author.username }} | {{ article.created_at }}
                     </div>
                 </a>
+                <br>
+                <!-- 해시태그 표시 -->
+                <div class="hashtags">
+                    {% for hashtag in article.hashtags.all %}
+                        <div class="hashtag-block">
+                            {{ hashtag.name }}
+                        </div>
+                    {% endfor %}
+                </div>
                 <div class="d-flex justify-content-between mt-4">
                     <a href="{% url 'articles:articles' %}" class="btn btn-secondary btn-sm">
                         목록 보기

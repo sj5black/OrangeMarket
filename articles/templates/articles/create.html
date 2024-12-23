@@ -17,6 +17,17 @@
                     {{ form.title|add_class:"form-control" }}
                 </div>
             </div>
+            
+            <!-- 해시태그 입력 폼 -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <label for="id_hashtags" class="text-white">해시태그</label>
+                    {{ form.hashtags|add_class:"form-control" }}
+                    <small class="form-text" style="color: white;">
+                        해시태그를 입력하세요. (예: #가방 #패션 #신상...)
+                    </small>
+                </div>
+            </div>
 
             <!-- 내용 등록 폼 -->
             <div class="row mb-4">

@@ -1,6 +1,12 @@
 from django.db import models
 from django.conf import settings
 
+class Hashtag(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+    
 class Article(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
@@ -20,6 +26,7 @@ class Article(models.Model):
         )
     
     view_count = models.PositiveIntegerField(default=0)
+    hashtags = models.ManyToManyField(Hashtag, related_name='articles', blank=True)
     
     def __str__(self):
         return self.title
@@ -38,3 +45,4 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.content
+

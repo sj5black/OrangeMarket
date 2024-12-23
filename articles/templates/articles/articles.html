@@ -2,21 +2,32 @@
 {% load static %}
 
 {% block content %}
-    <!-- 상품 정렬 -->
+    <!-- 상품 정렬 및 검색 -->
     <div class="container mt-4">
-        <div class="row justify-content-start">
-            <div class="col-md-2">
-                <form method="get" action="{% url 'articles:articles' %}">
+        <div class="row justify-content-center d-flex align-items-center">
+            <!-- 검색창, 검색 버튼, 드롭다운을 같은 row에 배치 -->
+            <div class="col-md-8 d-flex justify-content-between">
+                <form method="get" action="{% url 'articles:articles' %}" class="d-flex w-100">
+                    <!-- 검색창 -->
+                    <input type="text" name="q" value="{{ query }}" class="form-control me-2" placeholder="검색어를 입력하세요..." style="border-radius: 50px; height: 45px; flex-grow: 1;">
+                    <!-- 검색 버튼 (돋보기 아이콘) -->
+                    <button type="submit" class="btn btn-light" style="border-radius: 50px; height: 45px; padding: 0 15px; display: flex; align-items: center;">
+                        <i class="fas fa-search" style="font-size: 18px; color: #333;"></i>
+                    </button>
+                </form>
+                <!-- 드롭다운 버튼 -->
+                <form method="get" action="{% url 'articles:articles' %}" class="ms-3">
                     <div class="input-group">
-                        <select name="sort_by" class="form-select" onchange="this.form.submit()" style="background-color: #333333; color: #ffffff;">
-                            <option value="date" {% if request.GET.sort_by == 'date' %}selected{% endif %} style="background-color: #333333; color: #ffffff;">최신순</option>
-                            <option value="popularity" {% if request.GET.sort_by == 'popularity' %}selected{% endif %} style="background-color: #333333; color: #ffffff;">인기도순</option>
+                        <select name="sort_by" class="form-select" onchange="this.form.submit()" style="background-color: #333333; color: #ffffff; border-radius: 50px; height: 45px; width: 120px; border: none;">
+                            <option value="date" {% if request.GET.sort_by == 'date' %}selected{% endif %}>최신순</option>
+                            <option value="popularity" {% if request.GET.sort_by == 'popularity' %}selected{% endif %}>인기도순</option>
                         </select>
                     </div>
-                </form>                
+                </form>
             </div>
         </div>
     </div>
+
     <br>
     <!-- 상품 목록 -->
     <div class="container">
