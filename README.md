@@ -19,6 +19,10 @@
 
 ## 프로젝트 소개
 
+- Frontend: HTML, CSS
+- Backend: Django, Python
+- DB : SQlite3
+
 ### 회원 기능
 
 - **회원가입 / 로그인 / 로그아웃**
@@ -118,6 +122,209 @@
 6. 브라우저에서 `http://127.0.0.1:8000`에 접속하여 애플리케이션을 사용합니다.
 
 <br><br>
+
+## 🔍 Directory Structure
+
+```
+OrangeMarket
+│  .gitignore.txt
+│  db.sqlite3
+│  directory_structure.txt
+│  ERD.drawio
+│  manage.py
+│  README.md
+│  references.md
+│  requirements.txt
+│  
+├─accounts
+│  │  admin.py
+│  │  apps.py
+│  │  forms.py
+│  │  models.py
+│  │  tests.py
+│  │  urls.py
+│  │  views.py
+│  │  __init__.py
+│  │  
+│  ├─migrations
+│  │  │  0001_initial.py
+│  │  │  0002_user_followings.py
+│  │  │  0003_user_profile_picture.py
+│  │  │  __init__.py
+│  │  │  
+│  │  └─__pycache__
+│  │          0001_initial.cpython-312.pyc
+│  │          0002_user_followings.cpython-312.pyc
+│  │          0003_user_profile_picture.cpython-312.pyc
+│  │          __init__.cpython-312.pyc
+│  │          
+│  ├─templates
+│  │  └─accounts
+│  │          change_password.html
+│  │          login.html
+│  │          signup.html
+│  │          update.html
+│  │          
+│  └─__pycache__
+│          admin.cpython-312.pyc
+│          apps.cpython-312.pyc
+│          forms.cpython-312.pyc
+│          models.cpython-312.pyc
+│          urls.cpython-312.pyc
+│          views.cpython-312.pyc
+│          __init__.cpython-312.pyc
+│          
+├─articles
+│  │  admin.py
+│  │  apps.py
+│  │  forms.py
+│  │  models.py
+│  │  tests.py
+│  │  urls.py
+│  │  views.py
+│  │  __init__.py
+│  │  
+│  ├─.vs
+│  │  │  ProjectSettings.json
+│  │  │  slnx.sqlite
+│  │  │  VSWorkspaceState.json
+│  │  │  
+│  │  └─articles
+│  │      ├─FileContentIndex
+│  │      │      72ec1f9f-199a-4186-863d-bf414f824601.vsidx
+│  │      │      
+│  │      └─v17
+│  ├─migrations
+│  │  │  0001_initial.py
+│  │  │  0002_article_author.py
+│  │  │  0003_comment_author.py
+│  │  │  0004_article_like_users.py
+│  │  │  0005_article_view_count.py
+│  │  │  0006_hashtag_article_hashtags.py
+│  │  │  __init__.py
+│  │  │  
+│  │  └─__pycache__
+│  │          0001_initial.cpython-312.pyc
+│  │          0002_article_author.cpython-312.pyc
+│  │          0002_article_created_at_article_updated_at.cpython-312.pyc
+│  │          0003_article_image_alter_article_title.cpython-312.pyc
+│  │          0003_comment_author.cpython-312.pyc
+│  │          0004_article_like_users.cpython-312.pyc
+│  │          0004_comment.cpython-312.pyc
+│  │          0005_alter_comment_article.cpython-312.pyc
+│  │          0005_article_view_count.cpython-312.pyc
+│  │          0006_hashtag_article_hashtags.cpython-312.pyc
+│  │          __init__.cpython-312.pyc
+│  │          
+│  ├─static
+│  │  └─articles
+│  │          book.png
+│  │          orange.png
+│  │          placeholder.jpg
+│  │          
+│  ├─templates
+│  │  └─articles
+│  │          articles.html
+│  │          article_detail.html
+│  │          create.html
+│  │          update.html
+│  │          
+│  └─__pycache__
+│          admin.cpython-312.pyc
+│          apps.cpython-312.pyc
+│          forms.cpython-312.pyc
+│          models.cpython-312.pyc
+│          urls.cpython-312.pyc
+│          views.cpython-312.pyc
+│          __init__.cpython-312.pyc
+│          
+├─media
+│  ├─images
+│  │      product_1.jpg
+│  │      product_10.jpg
+│  │      product_10_8S4YXXd.jpg
+│  │      product_11.png
+│  │      product_11_zECk9dc.png
+│  │      product_12.png
+│  │      product_12_fOSAAY1.png
+│  │      product_1_z8BUEEV.jpg
+│  │      product_2.jpg
+│  │      product_2_U1NZEy4.jpg
+│  │      product_3.jpg
+│  │      product_3_72aJdIr.jpg
+│  │      product_4.jpg
+│  │      product_4_JL0MbaB.jpg
+│  │      product_5.jpg
+│  │      product_5_AeCT93K.jpg
+│  │      product_6.jpg
+│  │      product_6_R0kr03c.jpg
+│  │      product_7.jpg
+│  │      product_7_WY9D6Sc.jpg
+│  │      product_8.jpg
+│  │      product_8_f2IxCDk.jpg
+│  │      product_9.jpg
+│  │      product_9_QZaDlDm.jpg
+│  │      
+│  └─profile_pictures
+│          assassins_creed_odyssey_002.jpg
+│          GitHub.png
+│          스크린샷_2023-08-21_225303.png
+│          스크린샷_2024-05-27_032616.png
+│          스크린샷_2024-05-27_032616_4RPcZqJ.png
+│          
+├─OrangeMarket
+│  │  asgi.py
+│  │  settings.py
+│  │  urls.py
+│  │  wsgi.py
+│  │  __init__.py
+│  │  
+│  └─__pycache__
+│          settings.cpython-312.pyc
+│          urls.cpython-312.pyc
+│          wsgi.cpython-312.pyc
+│          __init__.cpython-312.pyc
+│          
+├─resources
+├─static
+│  ├─css
+│  │      style.css
+│  │      
+│  └─users
+│          user.png
+│          
+├─templates
+│      base.html
+│      
+└─users
+    │  admin.py
+    │  apps.py
+    │  models.py
+    │  tests.py
+    │  urls.py
+    │  views.py
+    │  __init__.py
+    │  
+    ├─migrations
+    │  │  __init__.py
+    │  │  
+    │  └─__pycache__
+    │          __init__.cpython-312.pyc
+    │          
+    ├─templates
+    │  └─users
+    │          profile.html
+    │          
+    └─__pycache__
+            admin.cpython-312.pyc
+            apps.cpython-312.pyc
+            models.cpython-312.pyc
+            urls.cpython-312.pyc
+            views.cpython-312.pyc
+            __init__.cpython-312.pyc
+```
+---
+<br>
 
 ## 데이터베이스 구조
 
