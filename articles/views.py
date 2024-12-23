@@ -2,22 +2,29 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.auth import get_user_model
+from django.db.models import Count
 
 from .forms import ArticleForm, CommentForm
 from .models import Article, Comment
 
-# def home(request):
-#     return render(request, "articles/home.html")
-
 def articles(request):
-    articles = Article.objects.all().order_by("-id")
+    sort_by = request.GET.get('sort_by', 'date')
+    if sort_by == 'popularity':
+        articles = Article.objects.annotate(like_count=Count('like_users')).order_by('-like_count', '-created_at')
+    elif sort_by == 'date':
+        articles = Article.objects.order_by('-created_at')
+    else:
+        articles = Article.objects.all().order_by("-id")
     context = {"articles" : articles}
     return render(request, "articles/articles.html", context)
 
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
+    article.view_count += 1
+    article.save()
+    
     comment_form = CommentForm()
-    comments = article.comments.all().order_by("-id")
+    comments = article.comments.all().order_by("id")
     total_comments = article.comments.count()
     context = {
         "article" : article, 

@@ -19,6 +19,8 @@ class Article(models.Model):
         related_name="like_articles"
         )
     
+    view_count = models.PositiveIntegerField(default=0)
+    
     def __str__(self):
         return self.title
 

@@ -73,3 +73,67 @@ comment.save()
 6. article -> comment 역참조 (_set 사용 or related name 으로 별명 설정)
 article.comment_set.all()
 ```
+
+
+```
+<HTTP 상태코드>
+
+200 OK
+- 성공 - 에러없이 요청이 성공.
+201 Created
+- 요청이 성공했고 새로운 데이터가 만들어짐.
+202 Accepted
+- 요청은 정상적이나 아직 처리가 완료되지 않음.
+204 No Content
+- 요청은 성공적으로 처리했으나 전송할 데이터(Response Body)가 없음.
+ 400 Bad Request
+- 클라이언트의 요청이 잘못되었음.
+- 서버는 해당 요청을 처리하지 않음.
+401 Unauthorized
+- 클라이언트가 인증이 되지 않았거나 인증정보가 유효하지 않음.
+403 Forbidden
+- 서버에서 요청을 이해했으나 금지된 요청.
+- 요청에 대한 자원이 있으나 수행할 권한이 없음.
+404 Not Found
+- 요청한 자원을 찾을 수 없음.
+500 Internal Server Error
+- 요청에 대해 서버가 수행하지 못하는 상황.
+- 서버가 동작하지 않는다는 포괄적인 의미가 내포됨.
+503 Service Unavailable
+- 서버가 요청을 처리할 준비가 되지 않았음.
+- 서버가 다운되었거나 일시적으로 중단된 상태.
+```
+---
+```
+<URI의 구조> - https://www.aidenlim.dev:80/path/to/resource/?key=value#docs
+
+- `https://`
+- Scheme(Protocol)
+    - 브라우저가 사용하는 프로토콜입니다.
+    - http, https, ftp, file, …
+        
+- `www.aidenlim.dev`
+- Host(Domain name)
+    - 요청을 처리하는 웹 서버입니다.
+    - IP 주소를 바로 사용할 수 있지만 도메인 이름을 받아서 사용하는 것이 일반적입니다.
+        
+- `:80`
+- Port
+    - 리소스에 접근할 때 사용되는 일종의 문(게이트)입니다.
+    - HTTP: 80 / HTTPS: 443이 표준 포트입니다.
+        
+- `/path/to/resource/`
+- Path
+    - 웹 서버에서의 리소스 경로입니다.
+    - 웹 초기에는 실제 물리적인 위치를 나타냈으나 현재는 추상화된 형태를 표현합니다.
+        
+- `?key=value`
+- Query(Identifier)
+    - 웹 서버에 제공하는 추가적인 변수입니다.
+    - `&`로 구분되는 Key=Value 형태의 데이터입니다.
+        
+- `#docs`
+- Fragment(Anchor)
+    - 해당 자원 안에서의 특정 위치 (북마크)를 나타냅니다.
+    - HTML 문서의 특정 부분을 보여주기 위한 방법입니다.
+```

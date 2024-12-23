@@ -6,9 +6,9 @@
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center">
                 {% if article.image %}
-                    <img src="{{ article.image.url }}" alt="{{ article.image }}" class="img-fluid rounded mb-3" style="width: 1500px; object-fit: cover;">
+                    <img src="{{ article.image.url }}" alt="{{ article.image }}" class="img-fluid rounded mb-3" style="width: 700px; object-fit: cover;">
                 {% else %}
-                    <img src="{% static 'articles/placeholder.jpg' %}" alt="Placeholder Image" class="img-fluid rounded mb-3" style="width: 1500px; object-fit: cover;">
+                    <img src="{% static 'articles/placeholder.jpg' %}" alt="Placeholder Image" class="img-fluid rounded mb-3" style="width: 700px; object-fit: cover;">
                 {% endif %}
             </div>
         </div>
@@ -19,8 +19,9 @@
                 <hr class="border-white">
                 <p class="lead text-white" style="font-size: 1rem;">{{ article.content }}</p>
                 <a href="{% url 'users:profile' username=article.author.username %}" class="text-muted text-decoration-none">
-                    <div class="text-white text-center mt-4">
-                        <p class="small">{{ article.author.username }} | {{ article.created_at }}</p>
+                    <div class="text-white text-left mt-4">
+                        <img src="{% if article.author.profile_picture %}{{ article.author.profile_picture.url }}{% else %}{% static 'users/user.png' %}{% endif %}" style="height: 20px; width: 20px; object-fit: cover; border-radius: 50%; margin-right: 5px;">
+                        {{ article.author.username }} | {{ article.created_at }}
                     </div>
                 </a>
                 <div class="d-flex justify-content-between mt-4">
@@ -60,16 +61,6 @@
 
         <h4 class="small text-white">댓글 {{ total_comments }} 개</h4>
 
-        {% if request.user.is_authenticated %}
-            <form action="{% url 'articles:comment_create' article.pk %}" method="POST" class="mt-3">
-                {% csrf_token %}
-                <div class="form-group">
-                    <textarea name="content" class="form-control" rows="3" placeholder="댓글을 입력하세요..." style="resize: none;"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">댓글 작성</button>
-            </form>
-        {% endif %}
-
         <div class="mt-4">
             {% for comment in comments %}
                 <div class="media mb-4">
@@ -88,5 +79,15 @@
                 </div>
             {% endfor %}
         </div>
+
+        {% if request.user.is_authenticated %}
+            <form action="{% url 'articles:comment_create' article.pk %}" method="POST" class="mt-3">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea name="content" class="form-control" rows="3" placeholder="댓글을 입력하세요..." style="resize: none;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">댓글 작성</button>
+            </form>
+        {% endif %}
     </div>
 {% endblock content %}

@@ -1,11 +1,50 @@
 {% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
 {% block content %}
-    <h2>상품 등록</h2>
-    
-    <form action="{% url "articles:create" %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        
-        <button type="submit">저장</button>
-    </form>
+    <div class="container mt-4">
+        <h2 class="text-center text-white">상품 등록</h2>
+        <hr class="border-white">
+
+        <form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- 제목 등록 폼 -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <label for="id_title" class="text-white">상품 제목</label>
+                    {{ form.title|add_class:"form-control" }}
+                </div>
+            </div>
+
+            <!-- 내용 등록 폼 -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <label for="id_content" class="text-white">상품 설명</label>
+                    {{ form.content|add_class:"form-control" }}
+                </div>
+            </div>
+
+            <!-- 이미지 등록 폼 -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <label for="id_image" class="text-white">상품 이미지</label>
+                    <br>
+                    {{ form.image|add_class:"form-control-file" }}
+                </div>
+            </div>
+
+            <!-- 저장 버튼 -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-lg btn-block">저장</button>
+            </div>
+        </form>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'articles:articles' %}" class="btn btn-secondary btn-sm">
+                이전으로
+            </a>
+        </div>
+    </div>
 {% endblock content %}

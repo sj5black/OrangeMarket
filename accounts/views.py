@@ -5,12 +5,11 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import (
     AuthenticationForm, UserCreationForm, PasswordChangeForm)
 from django.views.decorators.http import require_POST, require_http_methods
-from .forms import CustomUserChangeForm, CustomUserCreationForm
-
+from .forms import CustomUserChangeForm, CustomUserCreationForm, ProfilePictureForm
+from django.contrib.auth.decorators import login_required
 
 @require_http_methods(["GET", "POST"])
 def login(request):
-    print(f"로그인 시 request값 : {request}")
     if request.method == "POST":
         form = AuthenticationForm(data = request.POST)
         if form.is_valid():
@@ -73,5 +72,3 @@ def change_password(request):
     form = PasswordChangeForm(request.user)
     context = {"form" : form}
     return render(request, "accounts/change_password.html", context)
-    
-    

@@ -12,7 +12,6 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = "__all__"
         exclude = ("article","author",)
-    # content = forms.CharField(max_length=200, widget=forms.Textarea)
         
 """
 class ArticleForm(forms.Form):

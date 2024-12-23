@@ -2,6 +2,23 @@
 {% load static %}
 
 {% block content %}
+    <!-- 상품 정렬 -->
+    <div class="container mt-4">
+        <div class="row justify-content-start">
+            <div class="col-md-2">
+                <form method="get" action="{% url 'articles:articles' %}">
+                    <div class="input-group">
+                        <select name="sort_by" class="form-select" onchange="this.form.submit()" style="background-color: #333333; color: #ffffff;">
+                            <option value="date" {% if request.GET.sort_by == 'date' %}selected{% endif %} style="background-color: #333333; color: #ffffff;">최신순</option>
+                            <option value="popularity" {% if request.GET.sort_by == 'popularity' %}selected{% endif %} style="background-color: #333333; color: #ffffff;">인기도순</option>
+                        </select>
+                    </div>
+                </form>                
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- 상품 목록 -->
     <div class="container">
         <div class="row">
             {% for article in articles %}
@@ -20,7 +37,12 @@
                         <div class="card-footer text-center">
                             <div class="d-flex justify-content-between align-items-center">
                                 <small class="text-muted">
-                                    <a href="{% url 'users:profile' username=article.author.username %}" class="text-muted text-decoration-none">판매자: {{ article.author.username }}</a>
+                                    <a href="{% url 'users:profile' username=article.author.username %}" class="text-muted text-decoration-none">
+                                        <small class="text-muted">
+                                            <img src="{% if article.author.profile_picture %}{{ article.author.profile_picture.url }}{% else %}{% static 'users/user.png' %}{% endif %}" style="height: 20px; width: 20px; object-fit: cover; border-radius: 50%; margin-right: 5px;">
+                                            {{ article.author.username }}
+                                        </small>                                        
+                                    </a>
                                 </small>
                                 
                                 <form action="{% url "articles:like" article.pk %}" method="POST" class="d-inline">
@@ -35,6 +57,11 @@
                                         </button>
                                     {% endif %}
                                 </form>
+                                <small class="text-muted ms-2">
+                                    ❤️ {{ article.like_users.count }}  
+                                    👀 {{ article.view_count }}
+                                </small>
+                                
                             </div>
                         </div>
                     </div>
