@@ -8,6 +8,9 @@ from .forms import ArticleForm, CommentForm
 from .models import Article, Comment, Hashtag
 
 def articles(request):
+    if not request.user.is_authenticated:
+        return redirect("accounts:login")
+    
     sort_by = request.GET.get('sort_by', 'date')
     articles = Article.objects.all()
     
@@ -33,6 +36,9 @@ def articles(request):
     return render(request, "articles/articles.html", context)
 
 def article_detail(request, pk):
+    if not request.user.is_authenticated:
+        return redirect("accounts:login")
+    
     article = get_object_or_404(Article, pk=pk)
     article.view_count += 1
     article.save()
@@ -71,9 +77,10 @@ def add_hashtags_to_article(article, hashtags):
         hashtag_obj, created = Hashtag.objects.get(name=hashtag_name)
         article.hashtags.add(hashtag_obj)  # Hashtag 객체를 Article에 추가
 
-        
-@login_required
 def create(request):
+    if not request.user.is_authenticated:
+        return redirect("accounts:login")
+    
     if request.method == "POST":
         form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
@@ -93,9 +100,11 @@ def create(request):
     context = {"form": form}
     return render(request, "articles/create.html", context)
 
-@login_required
 @require_http_methods(["GET", "POST"])
 def update(request, pk):
+    if not request.user.is_authenticated:
+        return redirect("accounts:login")
+    
     article = get_object_or_404(Article, pk=pk)
     if request.user != article.author:
         return redirect("articles:articles")
@@ -118,19 +127,15 @@ def update(request, pk):
     context = {"form": form, "article": article}
     return render(request, "articles/update.html", context)
 
-
-
-@login_required
 @require_POST
 def delete(request, pk):
-    if request.user.is_authenticated:
-        article = get_object_or_404(Article, pk=pk)
-        if request.user == article.author:
-            # 게시글에 사용된 해시태그가 다른 게시글에서 사용되지 않는 경우 삭제
-            for hashtag in article.hashtags.all():
-                if hashtag.articles.count() == 1:  # 다른 게시글에서 사용되지 않음
-                    hashtag.delete()
-            article.delete()  # 게시글 삭제
+    article = get_object_or_404(Article, pk=pk)
+    if request.user == article.author:
+        # 게시글에 사용된 해시태그가 다른 게시글에서 사용되지 않는 경우 삭제
+        for hashtag in article.hashtags.all():
+            if hashtag.articles.count() == 1:  # 다른 게시글에서 사용되지 않음
+                hashtag.delete()
+        article.delete()  # 게시글 삭제
 
     return redirect("articles:articles")
 

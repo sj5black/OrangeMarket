@@ -9,6 +9,9 @@ from articles.models import Article
 #     return render(request, "users/users.html")
 
 def profile(request, username):
+    if not request.user.is_authenticated:
+        return redirect("accounts:login")
+    
     member = get_object_or_404(get_user_model(), username=username)
     
     # 사용자가 자신의 프로필을 보는 경우에만 사진 업데이트 가능

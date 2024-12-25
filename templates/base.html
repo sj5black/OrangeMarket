@@ -12,51 +12,12 @@
     <script src="https://kit.fontawesome.com/c190cf80cc.js" crossorigin="anonymous"></script>
     {% block head %}{% endblock head %}
     <style>
-        /* Make the navbar sticky to the top */
-        .navbar {
-            z-index: 1050; /* Ensures navbar stays on top of other content */
-        }
-        
-        /* 선택되지 않은 탭의 글씨 색상 변경 */
-        .nav-link:not(.active) {color: white;}
-
-        .hashtag-block {
-            display: inline-block;
-            background-color: #f0f0f0;  /* 배경색 */
-            color: #333;  /* 글씨 색상 */
-            padding: 5px 10px;
-            margin: 5px;
-            border-radius: 10px;  /* 둥근 모서리 */
-            font-size: 14px;
-        }
-        
-        /* Main content area should take up remaining space */
-        .content-wrapper {
-            min-height: calc(100vh - 56px - 60px); /* Adjusting for navbar and footer height */
-            padding-bottom: 60px; /* Give some space for footer */
-        }
-        
         /* 페이지 전체 배경색 설정 */
         html, body {
             height: 100%;
             margin: 0;
             background-color: #4D4D4D;
             color: white; /* 텍스트 색상을 흰색으로 설정 */
-        }
-
-        .container {
-            background-color: transparent; /* 배경색을 투명하게 설정 */
-        }
-
-        /* Footer to stick at the bottom */
-        footer {
-            {% comment %} position: fixed; {% endcomment %}
-            bottom: 0;
-            width: 100%;
-            background-color: #343a40;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
         }
     </style>
 </head>
@@ -95,6 +56,7 @@
                                 <button type="submit" class="btn btn-link nav-link">회원탈퇴</button>
                             </form>
                         </li>
+
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'accounts:login' %}">로그인</a>
