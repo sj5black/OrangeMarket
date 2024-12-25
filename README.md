@@ -326,8 +326,8 @@ OrangeMarket
 
 상품품 목록 페이지에서 유저는 상품을 최신순 또는 인기도순으로 정렬할 수 있습니다. 각 상품은 찜 갯갯수와 조회수를 표시하고, 작성자의 프로필을 클릭하면 해당 유저의 프로필 페이지로 이동합니다.
 
-![article_1](resources/article_1.png)
-![article_2](resources/article_2.png)
+![articles_1](resources/articles_1.png)
+![articles_2](resources/articles_2.png)
 
 ### 상품 상세보기 페이지
 
